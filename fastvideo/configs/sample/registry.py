@@ -3,6 +3,7 @@ import os
 from collections.abc import Callable
 from typing import Any
 
+from fastvideo.configs.sample.flux import FluxSamplingParam
 from fastvideo.configs.sample.hunyuan import (FastHunyuanSamplingParam,
                                               HunyuanSamplingParam)
 from fastvideo.configs.sample.hunyuan15 import Hunyuan15_480P_SamplingParam, Hunyuan15_720P_SamplingParam
@@ -41,6 +42,8 @@ from fastvideo.utils import (maybe_download_model_index,
 logger = init_logger(__name__)
 # Registry maps specific model weights to their config classes
 SAMPLING_PARAM_REGISTRY: dict[str, Any] = {
+    "black-forest-labs/FLUX.1-dev": FluxSamplingParam,
+    "black-forest-labs/FLUX.1-schnell": FluxSamplingParam,
     "FastVideo/FastHunyuan-diffusers": FastHunyuanSamplingParam,
     "hunyuanvideo-community/HunyuanVideo": HunyuanSamplingParam,
     "hunyuanvideo-community/HunyuanVideo-1.5-Diffusers-480p_t2v":
@@ -141,6 +144,7 @@ SAMPLING_PARAM_DETECTOR: dict[str, Callable[[str], bool]] = {
 
 # Fallback configs when exact match isn't found but architecture is detected
 SAMPLING_FALLBACK_PARAM: dict[str, Any] = {
+    "flux": FluxSamplingParam,
     "hunyuan":
     HunyuanSamplingParam,  # Base Hunyuan config as fallback for any Hunyuan variant
     "hunyuan15":

@@ -6,7 +6,7 @@ from fastvideo.configs.models.dits.base import DiTArchConfig, DiTConfig
 
 
 @dataclass
-class FluxArchConfig(DiTArchConfig):
+class LTX2ArchConfig(DiTArchConfig):
     param_names_mapping: dict = field(
         default_factory=lambda: {
             r"^norm_out\.linear\.(weight|bias)$":
@@ -118,6 +118,6 @@ class FluxArchConfig(DiTArchConfig):
 
 
 @dataclass
-class FluxConfig(DiTConfig):
-    arch_config: DiTArchConfig = field(default_factory=FluxArchConfig)
-    prefix: str = "flux"
+class LTX2VideoConfig(DiTConfig):
+    arch_config: DiTArchConfig = field(default_factory=LTX2ArchConfig)
+    prefix: str = "ltx2"
