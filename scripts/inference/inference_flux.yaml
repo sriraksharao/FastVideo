@@ -1,0 +1,20 @@
+# Run with:
+#   FASTVIDEO_ATTENTION_BACKEND=FLASH_ATTN fastvideo generate --config scripts/inference/inference_flux.yaml
+generator:
+  model_path: black-forest-labs/FLUX.1-dev
+  engine:
+    num_gpus: 1
+    parallelism:
+      tp_size: 1
+      sp_size: 1
+request:
+  prompt: A cat holding a sign that says hello world
+  sampling:
+    seed: 42
+    num_frames: 1
+    height: 1024
+    width: 1024
+    num_inference_steps: 28
+    guidance_scale: 3.5
+  output:
+    output_path: outputs_video/
